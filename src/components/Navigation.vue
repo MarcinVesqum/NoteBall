@@ -17,8 +17,8 @@
       <!-- Desktop menu-->
       <div class="hidden w-full md:block md:w-auto">
         <ul class="flex p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:mt-0 md:text-sm md:border-0">
-            <RouterLink active-class="active" class="font-bold xl:text-5xl " :to="{ name: 'notes'}">Notes</RouterLink>
-            <RouterLink active-class="active" class="font-bold xl:text-5xl " :to="{ name: 'stats'}">Stats</RouterLink>
+            <RouterLink active-class="active" class="font-bold xl:text-xl " :to="{ name: 'notes'}">Notes</RouterLink>
+            <RouterLink active-class="active" class="font-bold xl:text-xl " :to="{ name: 'stats'}">Stats</RouterLink>
         </ul>
         
       </div>
