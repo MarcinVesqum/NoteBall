@@ -1,7 +1,8 @@
+import { default } from '../../composables/useTailwindConfig';
 <template>
-  <div class="container h-[250px] mx-auto max-w-screen-lg rounded-md bg-secondary shadow-md">
+  <div :class="`bg-${bgColor}`"  class="container h-[250px] mx-auto max-w-screen-lg rounded-md  shadow-md mt-2 ">
     <div class="flex flex-col justify-center p-5">
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ label }}</label>
+      <label class="block mb-2 text-sm text-white font-medium text-gray-900">{{ label }}</label>
       <textarea 
       v-model="modelValue"
       @input="$emit('update:modelValue', modelValue)"
@@ -14,9 +15,6 @@
     </div>
     <slot name="button"></slot>
   </div>
-
-        
-
 </template>
 
 <script setup lang="ts">
@@ -27,6 +25,10 @@
     modelValue: {
       type: String,
       required: true
+    },
+    bgColor: {
+      type: String,
+      default: 'secondary'
     },
     label: {
       type: String,
@@ -41,8 +43,8 @@
   emits
 */
   const emit = defineEmits(['modelValue'])
+
+
   
-
-
 </script>
 
