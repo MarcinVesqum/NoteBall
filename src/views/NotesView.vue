@@ -22,7 +22,6 @@
     :note="note"
     />
   </div>
-  <pre>{{ newNoteContent}}</pre>
 </template>
 
 <script setup lang="ts">
