@@ -5,6 +5,7 @@
     v-model="newNoteContent"
     label=""
     placeholder="add new note"
+    ref="addEditNoteRef"
    >
     <template #button>
       <button
@@ -32,6 +33,8 @@
   import Note from "@/components/Notes/Note.vue"
   import  AddEditNote from "@/components/Notes/AddEditNote.vue"
   import { useStoreNotes } from '../stores/storeNotes'
+  import { useWatchCharacters } from '../composables/use/useWatchCharacters'
+
 
 /*
   Store
@@ -41,7 +44,7 @@
   Note Data
 */
 
-  const newNoteContent = ref('')
+  const newNoteContent = ref<string>('')
 
 /*
     add Note
@@ -50,7 +53,9 @@
     storeNotes.addNote(newNoteContent.value)
     newNoteContent.value = ''
   }
-
-
+/*
+  watcher characters
+*/
+useWatchCharacters(newNoteContent, 50)
 
 </script>

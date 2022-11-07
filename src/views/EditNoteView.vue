@@ -14,7 +14,7 @@
          class="inline-flex items-center float-right px-3 py-2 mr-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Save Note</button>
         <button
           @click="router.push('/')"
-         class="inline-flex items-center float-right px-3 py-2 mr-4 text-sm font-medium text-center text-primary bg-white rounded-lg hover:bg-gray-light focus:ring-4 focus:outline-none focus:ring-blue-300">
+         class="inline-flex items-center float-right px-3 py-2 mr-4 text-sm font-medium text-center bg-white rounded-lg text-primary hover:bg-gray-light focus:ring-4 focus:outline-none focus:ring-blue-300">
           Cencle
         </button>
 
@@ -28,6 +28,7 @@
 import  AddEditNote from '@/components/Notes/AddEditNote.vue'
 import { useStoreNotes } from '@/stores/storeNotes'
 import { useRouter, useRoute } from 'vue-router'
+import { useWatchCharacters } from '../composables/use/useWatchCharacters'
 import { ref } from 'vue'
 
 /*
@@ -53,6 +54,7 @@ import { ref } from 'vue'
     storeNotes.updateNote(route.params.id, editContent.value)
     router.push('/')
   }
+  useWatchCharacters(editContent, 90)
 
 </script>
   

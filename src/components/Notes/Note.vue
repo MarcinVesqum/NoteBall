@@ -23,7 +23,7 @@
 /*
     import 
 */
-    import { computed } from "vue"
+    import { computed, reactive } from "vue"
     import { useStoreNotes } from "@/stores/storeNotes";
     
 /*
@@ -49,6 +49,7 @@
              
         return `${contentlength} ${description}`
     })
+
 
 
 </script>
