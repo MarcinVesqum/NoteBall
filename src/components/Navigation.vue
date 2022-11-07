@@ -8,12 +8,15 @@
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
       </button>
       <!-- Mobie menu -->
-      <div v-if="mobileMenu" class="absolute left-[-9px] block w-full p-2 m-2 mt-2 top-[87%] bg-primary-light md:hidden z-10">
-        <ul class="flex flex-col ">
-            <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'notes'}">Notes</RouterLink>
-            <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'stats'}">Stats</RouterLink>
-        </ul>
-      </div>
+      <transition name="mobile">
+        <div v-if="mobileMenu" class="absolute left-[-9px] block w-full p-2 m-2 mt-2 top-[87%] bg-primary-light md:hidden z-10">
+          <ul class="flex flex-col ">
+              <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'notes'}">Notes</RouterLink>
+              <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'stats'}">Stats</RouterLink>
+          </ul>
+        </div>
+      </transition>
+      
       <!-- Desktop menu-->
       <div class="hidden w-full md:block md:w-auto">
         <ul class="flex p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:mt-0 md:text-sm md:border-0">
@@ -47,6 +50,21 @@
 <style >
 .active {
     color: #A18700;
+}
+
+.mobile-enter-from,
+.mobile-leave-to {
+  opacity: 0;
+}
+
+.mobile-enter-active,
+.mobile-leave-active {
+  transition: all .8s ease;
+}
+
+.mobile-enter-to,
+.mobile-leave-from {
+  opacity: 1;
 }
 </style>
 
