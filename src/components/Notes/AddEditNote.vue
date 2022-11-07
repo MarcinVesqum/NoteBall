@@ -1,4 +1,5 @@
 import { default } from '../../composables/useTailwindConfig';
+import { vAutofocus } from '../../composables/useAutofocus';
 <template>
   <div :class="`bg-${bgColor}`"  class="container h-[250px] mx-auto max-w-screen-lg rounded-md  shadow-md mt-2 ">
     <div class="flex flex-col justify-center p-5">
@@ -19,6 +20,10 @@ import { default } from '../../composables/useTailwindConfig';
 </template>
 
 <script setup lang="ts">
+/*
+  imports
+*/
+  import { vAutofocus } from '@/directives/useAutofocus'
 /*
   props
 */
@@ -45,14 +50,7 @@ import { default } from '../../composables/useTailwindConfig';
 */
   const emit = defineEmits(['modelValue'])
 
-/*
-  directives
-*/
-const vAutofocus = {
-    mounted(el: any) {
-      el.focus()
-    },
-  }
+
   
 </script>
 
