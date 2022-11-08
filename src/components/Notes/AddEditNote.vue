@@ -1,12 +1,10 @@
-import { default } from '../../composables/useTailwindConfig';
-import { vAutofocus } from '../../composables/useAutofocus';
 <template>
   <div :class="`bg-${bgColor}`"  class="container h-[250px] mx-auto max-w-screen-lg rounded-md  shadow-md mt-2 ">
     <div class="flex flex-col justify-center p-5">
-      <label class="block mb-2 text-sm text-white font-medium text-gray-900">{{ label }}</label>
+      <label class="block mb-2 text-sm font-medium text-white text-gray-900">{{ label }}</label>
       <textarea 
       v-model="modelValue"
-      @input="$emit('update:modelValue', modelValue)"
+      @input="emit('update:modelValue', modelValue)"
       :placeholder="placeholder"
       ref="textareaRef"
       v-autofocus
@@ -49,7 +47,7 @@ import { vAutofocus } from '../../composables/useAutofocus';
 /*
   emits
 */
-  const emit = defineEmits(['modelValue'])
+  const emit = defineEmits(['update:modelValue'])
 
 
   

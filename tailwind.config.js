@@ -14,6 +14,7 @@ module.exports = {
         'gray-dark': '#273444',
         'gray': '#8492a6',
         'gray-light': '#d3dce6',
+        'gray-light-alt': 'rgba(0,0,0 0.9)',
       },
       spacing: {
         '8xl': '96rem',

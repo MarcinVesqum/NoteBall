@@ -1,9 +1,9 @@
 <template>
-  <div class="notes">
+  <div class="notes ">
 
    <AddEditNote
     v-model="newNoteContent"
-    label=""
+    label="Add New Note"
     placeholder="add new note"
     ref="addEditNoteRef"
    >
@@ -44,7 +44,7 @@
   Note Data
 */
 
-  const newNoteContent = ref<string>('')
+  const newNoteContent = ref('')
 
 /*
     add Note
