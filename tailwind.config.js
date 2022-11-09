@@ -5,6 +5,9 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'sans': 'Helvetica, Arial, sans-serif',
+    },
     extend: {
       colors: {
         'primary': '#170EA1',
@@ -20,9 +23,7 @@ module.exports = {
         '8xl': '96rem',
         '9xl': '128rem',
       },
-      borderRadius: {
-        '4xl': '2rem',
-      },
+
       screens: {
         'sm': '640px',
         // => @media (min-width: 640px) { ... }
