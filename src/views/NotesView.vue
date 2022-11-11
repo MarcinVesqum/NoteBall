@@ -12,7 +12,7 @@
           @click="addNote" 
           class="inline-flex items-center float-right px-3 py-2 mr-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
             Add Note
-          </button>
+      </button>
 
     </template>
    </AddEditNote>
@@ -43,7 +43,7 @@
   /*
   import 
 */
-  import { ref } from "vue"
+  import { ref, onMounted } from "vue"
   import Note from "@/components/Notes/Note.vue"
   import  AddEditNote from "@/components/Notes/AddEditNote.vue"
   import { useStoreNotes } from '../stores/storeNotes'
@@ -66,7 +66,13 @@
   /*
   watcher characters
 */
-useWatchCharacters(newNoteContent, 50)
+useWatchCharacters(newNoteContent.value, 50)
+  /*
+  mounted
+*/
+onMounted(() => {
+    storeNotes.getNotes()
+  })
 
 </script>
 

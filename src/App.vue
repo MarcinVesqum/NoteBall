@@ -1,24 +1,28 @@
 <template>
   <Navigation/>
-  <div class="">
+  <div>
     <RouterView/>
   </div>
 </template>
 
 <script setup lang="ts">
-import  Navigation from './components/Navigation.vue';
-import { useStoreNotes } from './stores/storeNotes';
-import { onMounted } from 'vue';
+import  Navigation from './components/Layout/Navigation.vue'
+import { useStoreAuth } from './stores/storeAuth'
+import { onMounted } from 'vue'
   /*
   store
 */
-  const storeNotes = useStoreNotes()
+
+  const storeAuth = useStoreAuth()
 
   /*
   mounted
 */
   onMounted(() => {
-    storeNotes.getNotes()
+    storeAuth.init()
   })
+
+
+  
 </script>
 

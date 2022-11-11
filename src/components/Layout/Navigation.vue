@@ -1,12 +1,13 @@
 <template>   
 <nav 
-class="bg-primary border-gray-200 px-2 sm:px-4 py-2.5  text-white relative"
-ref="navbarMenuRef"
->
+  class="bg-primary border-gray-200 px-2 sm:px-4 py-2.5  text-white relative"
+  ref="navbarMenuRef"
+  >
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <RouterLink :to="{ name: 'notes'}" class="flex items-center">
           <span class="self-center text-xl font-semibold ">NoteBalls</span>
       </RouterLink>
+      
       <button 
       @click.prevent="showMobileMenu"
       aria-expanded="false"
@@ -21,12 +22,30 @@ ref="navbarMenuRef"
           <ul class="flex flex-col ">
               <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'notes'}">Notes</RouterLink>
               <RouterLink @click="showMobileMenu" class="font-bold hover:bg-secondary" :to="{ name: 'stats'}">Stats</RouterLink>
+              <button
+                v-if="storeAuth.user.id"
+                @click.prevent="handleLogout" 
+                type="button" 
+                class="flex flex-col items-center justify-center font-bold hover:bg-secondary">
+                <small>
+                  Singout {{ storeAuth.user.email }}
+                </small>  
+              </button>
           </ul>
         </div>
       </transition>
       
       <!-- Desktop menu-->
-      <div class="hidden w-full md:block md:w-auto">
+      <div class="items-center hidden w-full md:flex md:w-auto">
+
+          <button
+            v-if="storeAuth.user.id"
+            @click.prevent="handleLogout" 
+            class="w-full px-2 py-2 ml-2 font-bold text-center border rounded-full hover:scale-105 hover:bg-white hover:text-secondary hover:border-transparent focus:text-secondary focus:outline-none focus:bg-white" 
+            :class="useTailwindConfig">
+            Singout {{ storeAuth.user.email}}
+          </button>
+
         <ul class="flex p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:mt-0 md:text-sm md:border-0">
             <RouterLink active-class="active" class="font-bold xl:text-xl " :to="{ name: 'notes'}">Notes</RouterLink>
             <RouterLink active-class="active" class="font-bold xl:text-xl " :to="{ name: 'stats'}">Stats</RouterLink>
@@ -35,18 +54,22 @@ ref="navbarMenuRef"
       </div>
     </div>
   </nav>
-  <div class="flex text-7xl" id="navbar-default">
-    
-  </div>
+  
 </template>
 
 <script setup lang="ts">
-/*
-    IMPORT:
+  /*
+    imports
 */
     import { ref } from 'vue'
     import { onClickOutside } from '@vueuse/core'
-/*
+    import useTailwindConfig from '@/composables/use/useTailwindConfig'
+    import { useStoreAuth } from '@/stores/storeAuth'
+  /*
+  store auth
+*/
+  const storeAuth = useStoreAuth()
+  /*
     mobile
 */
     const mobileMenu = ref(false)
@@ -54,7 +77,7 @@ ref="navbarMenuRef"
     const showMobileMenu = () => {
         mobileMenu.value = !mobileMenu.value
     }
-/*
+  /*
     click outside to close 
 */
     const navbarMenuRef = ref(null)
@@ -66,8 +89,13 @@ ref="navbarMenuRef"
       ignore: [
         navbarBurgerRef
       ],
+    })
+/*
+    handle logout
+*/
+    const handleLogout = () => {
+      storeAuth.logout()
     }
-    )
     
 </script>
 
