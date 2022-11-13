@@ -49,6 +49,7 @@ import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { useStoreAuth } from "@/stores/storeAuth"
 import useTailwindConfig from '@/composables/use/useTailwindConfig'
+import type  Users from '@/types/Users'
 
     /*
     register / login
@@ -59,10 +60,7 @@ import useTailwindConfig from '@/composables/use/useTailwindConfig'
 */
     const { activeLinkAuth } = useTailwindConfig()
 
-    /*
-    Router
-*/
-const router = useRouter()
+
     /*
     store
 */
@@ -72,7 +70,7 @@ const storeAuth = useStoreAuth()
     form  AutData 
 */  
 
-    const credentials = reactive({
+    const credentials: Users = reactive({
         email: '',
         password: ''
     })

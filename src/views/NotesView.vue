@@ -43,7 +43,7 @@
   /*
   import 
 */
-  import { ref, onMounted } from "vue"
+  import { ref } from "vue"
   import Note from "@/components/Notes/Note.vue"
   import  AddEditNote from "@/components/Notes/AddEditNote.vue"
   import { useStoreNotes } from '../stores/storeNotes'
@@ -66,13 +66,7 @@
   /*
   watcher characters
 */
-useWatchCharacters(newNoteContent.value, 50)
-  /*
-  mounted
-*/
-onMounted(() => {
-    storeNotes.getNotes()
-  })
+useWatchCharacters(newNoteContent, 50)
 
 </script>
 

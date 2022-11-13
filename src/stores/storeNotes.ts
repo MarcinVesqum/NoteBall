@@ -6,9 +6,11 @@ import {
         deleteDoc, updateDoc
 } from "firebase/firestore"
 import { db } from "@/firebase/firebase.ts"
+import { useStoreAuth } from "@/stores/storeAuth"
 
-const noteCollectionRef = collection(db, "notes")
-const noteCollectionQuery = query(noteCollectionRef, orderBy('date', 'desc'))
+let noteCollectionRef: any,     
+    noteCollectionQuery: any,
+    getNotesSnapshot: any=null 
 
 export const useStoreNotes = defineStore('storeNotes', {
     state: () => ({
@@ -16,10 +18,20 @@ export const useStoreNotes = defineStore('storeNotes', {
         notesLoaded: false
     }),
     actions: {
+        init() {
+            const storeAuth = useStoreAuth()
+            noteCollectionRef = 
+                collection(db, 'users', storeAuth.user.id, 'notes')
+            noteCollectionQuery = 
+                query(noteCollectionRef, orderBy('date', 'desc'))
+            this.getNotes()
+        },
         async getNotes() {
             this.notesLoaded = false
-            onSnapshot(noteCollectionQuery, (querySnapshot) => {
-                console.log(querySnapshot);
+
+            if (getNotesSnapshot) getNotesSnapshot() // unsubscribe from any active listerne
+
+            getNotesSnapshot = onSnapshot(noteCollectionQuery, (querySnapshot) => {
                 let notes = []
                 querySnapshot.forEach((doc) => {
                     let note = {
@@ -32,8 +44,13 @@ export const useStoreNotes = defineStore('storeNotes', {
                 this.notes = notes
                 this.notesLoaded = true
 
+            }, error => {
+                console.log('error: ', error.message);
             });
-            
+                     
+        },
+        clearNotes() {
+            this.notes = []
         },
         async addNote(noteContent) {
             let currentDate = new Date().getTime(),

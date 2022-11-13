@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '@/firebase/firebase.ts'
+// Store
+import { useStoreNotes } from '../stores/storeNotes'
+
 // Router
 import { useRouter } from "vue-router"
 
@@ -42,13 +45,16 @@ export const useStoreAuth = defineStore('storeAuth', {
         },
         init() {
             onAuthStateChanged(auth, (user) => {
+                const storeNotes = useStoreNotes()
                 if (user) {
                   this.user.id = user.uid
                   this.user.email = user.email
                   this.router.push('/')
+                  storeNotes.init()
                 } else {
                   this.user = {}
                   this.router.replace('/auth')
+                  storeNotes.clearNotes()
                 }
             })
         }
